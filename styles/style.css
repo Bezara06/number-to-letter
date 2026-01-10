@@ -1,0 +1,18 @@
+
+
+h3{ color: powderblue;
+  margin-top: 15px;
+}
+body{
+  background-color: teal;
+}
+textarea{
+  width: 100%;
+}
+
+#div2{
+  display: inline;
+}
+.container{
+  margin-top:20%;
+}

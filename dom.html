@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="dom.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+    <button onclick="hide()" class="btn btn-close"></button>
+    <h1 class="text-success text-center">Adding a paragraph</h1>
+
+    <script>
+        function repeats(){
+         time = 0;
+            console.log("couont ! "+time++);
+            setTimeout(repeats, 5000);
+        }
+
+        setTimeout(repeats, 5000);
+    </script>
+</body>
+
+</html>
