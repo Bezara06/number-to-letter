@@ -10,9 +10,9 @@ button.addEventListener('click', function () {
   nb = document.getElementById('nombre').value;
 
   if (nb) {
-    let nb_uniter = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
+    let nb_uniter = ['', 'un ', 'deux ', 'trois ', 'quatre ', 'cinq ', 'six ', 'sept', 'huit', 'neuf'];
 
-    let nb_dizaine = ['dix', 'onze', 'douze', 'trieze', 'qatorze', 'quinze', 'sieze', 'dix-sept', 'dix huit', 'dix-neuf'];
+    let nb_dizaine = ['dix ', 'onze ', 'douze ', 'trieze ', 'qatorze ', 'quinze ', 'sieze ', 'dix-sept ', 'dix huit ', 'dix-neuf '];
 
     let nb_dizaine2 = ['', 'dix', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante', 'quatre-vingt', 'quatre-vingt'];
 
