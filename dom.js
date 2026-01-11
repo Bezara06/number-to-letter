@@ -14,8 +14,3 @@ function affiche() {
     elem.textContent = "Hello , world !";
     document.body.appendChild(elem);
 }
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     let age = prompt("How old are you?")
-//     console.log(age);
-// })
