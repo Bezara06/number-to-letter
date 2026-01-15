@@ -67,6 +67,18 @@ body {
   fill: #ffffff;
 }
 
+.close-btn {
+  width: 24px;
+  height: auto;
+  fill: #ffffff;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.close-btn:hover {
+  fill: #ff0000;
+}
+
 .nav .nav-links li a {
   color: #fff;
   text-decoration: none;

@@ -6,16 +6,22 @@ let menu_icon = document.querySelector('.icon-menu');
 menu_icon.addEventListener('click', () => {
   nav_links.style = "transform: translateX(0);"
 })
+
 document.addEventListener('click,', (e) => {
   if (!e.target.closest('.nav')) {
     nav_links.style = "transform: translateX(100%);"
   }
-  dlt_btn.addEventListener('click', () => {
-    document.querySelector('.form-control').value = "";
-  })
 });
 
+dlt_btn.addEventListener('click', () => {
+  document.querySelector('.form-control').value = "";
+})
+
 document.addEventListener('scroll', () => {
+  nav_links.style = "transform: translateX(100%);"
+})
+
+document.querySelector('.close-btn').addEventListener('click', () => {
   nav_links.style = "transform: translateX(100%);"
 })
 
