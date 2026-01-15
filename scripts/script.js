@@ -1,8 +1,22 @@
 let button = document.getElementById('button');
 let dlt_btn = document.getElementById('del')
+let nav_links = document.querySelector('.nav-links');
+let menu_icon = document.querySelector('.icon-menu');
 
-dlt_btn.addEventListener('click', () => {
-  document.querySelector('.form-control').value = "";
+menu_icon.addEventListener('click', () => {
+  nav_links.style = "transform: translateX(0);"
+})
+document.addEventListener('click,', (e) => {
+  if (!e.target.closest('.nav')) {
+    nav_links.style = "transform: translateX(100%);"
+  }
+  dlt_btn.addEventListener('click', () => {
+    document.querySelector('.form-control').value = "";
+  })
+});
+
+document.addEventListener('scroll', () => {
+  nav_links.style = "transform: translateX(100%);"
 })
 
 button.addEventListener('click', function () {
