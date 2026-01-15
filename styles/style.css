@@ -73,6 +73,7 @@ body {
   fill: #ffffff;
   cursor: pointer;
   margin-bottom: 20px;
+  display: none;
 }
 
 .close-btn:hover {
@@ -331,5 +332,9 @@ a {
 
   .nav .nav-links li {
     margin-bottom: 20px;
+  }
+
+  .close-btn {
+    display: block;
   }
 }
