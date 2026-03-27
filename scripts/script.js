@@ -1,148 +1,332 @@
-let button = document.getElementById('button');
-let dlt_btn = document.getElementById('del')
-let nav_links = document.querySelector('.nav-links');
-let menu_icon = document.querySelector('.icon-menu');
+const toolConfig = {
+  letters: {
+    title: "Nombre en lettres",
+    description: "Ecris un nombre decimal pour obtenir sa version en lettres.",
+    format: "DEC -> TXT",
+    inputLabel: "Nombre decimal",
+    placeholder: "Ex: 2026",
+    helper: "Accepte uniquement les chiffres de 0 a 999 999 999.",
+    examples: ["125", "2026", "4096"]
+  },
+  decToBin: {
+    title: "DEC to BIN",
+    description: "Convertit un nombre decimal positif en representation binaire.",
+    format: "DEC -> BIN",
+    inputLabel: "Nombre decimal",
+    placeholder: "Ex: 42",
+    helper: "Accepte uniquement les chiffres decimaux positifs.",
+    examples: ["8", "42", "255"]
+  },
+  binToDec: {
+    title: "BIN to DEC",
+    description: "Lis un nombre binaire et affiche son equivalent decimal.",
+    format: "BIN -> DEC",
+    inputLabel: "Nombre binaire",
+    placeholder: "Ex: 101010",
+    helper: "Utilise seulement 0 et 1.",
+    examples: ["1010", "11111111", "100000"]
+  },
+  octToDec: {
+    title: "OCTAL to DEC",
+    description: "Convertit un nombre en base 8 vers le systeme decimal.",
+    format: "OCT -> DEC",
+    inputLabel: "Nombre octal",
+    placeholder: "Ex: 17",
+    helper: "Utilise uniquement des chiffres de 0 a 7.",
+    examples: ["17", "144", "777"]
+  },
+  decToOct: {
+    title: "DEC to OCTAL",
+    description: "Transforme un nombre decimal en notation octale.",
+    format: "DEC -> OCT",
+    inputLabel: "Nombre decimal",
+    placeholder: "Ex: 64",
+    helper: "Accepte uniquement les chiffres decimaux positifs.",
+    examples: ["9", "64", "512"]
+  },
+  decToHex: {
+    title: "DEC to HEXA",
+    description: "Convertit un decimal vers l'hexadecimal en majuscules.",
+    format: "DEC -> HEX",
+    inputLabel: "Nombre decimal",
+    placeholder: "Ex: 255",
+    helper: "Accepte uniquement les chiffres decimaux positifs.",
+    examples: ["15", "255", "4095"]
+  }
+};
 
-menu_icon.addEventListener('click', () => {
-  nav_links.style = "transform: translateX(0);"
-})
+const toolButtons = document.querySelectorAll('.tool-item');
+const input = document.getElementById('nombre');
+const convertButton = document.getElementById('button');
+const clearButton = document.getElementById('del');
+const result = document.getElementById('div2');
+const feedback = document.getElementById('feedback');
+const copyButton = document.getElementById('copy-result');
+const helperText = document.getElementById('helper-text');
+const inputLabel = document.getElementById('input-label');
+const toolHeading = document.getElementById('tool-heading');
+const toolDescription = document.getElementById('tool-description');
+const toolFormat = document.getElementById('tool-format');
+const examplesContainer = document.getElementById('quick-examples');
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
 
-document.addEventListener('click,', (e) => {
-  if (!e.target.closest('.nav')) {
-    nav_links.style = "transform: translateX(100%);"
+let activeTool = 'letters';
+
+menuToggle.addEventListener('click', () => {
+  const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
+  menuToggle.setAttribute('aria-expanded', String(!expanded));
+  navLinks.classList.toggle('open');
+  document.body.classList.toggle('menu-open', !expanded);
+});
+
+document.addEventListener('click', (event) => {
+  if (!event.target.closest('.nav') && navLinks.classList.contains('open')) {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
   }
 });
 
-dlt_btn.addEventListener('click', () => {
-  document.querySelector('.form-control').value = "";
-})
+navLinks.querySelectorAll('a').forEach((link) => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuToggle.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  });
+});
 
-document.addEventListener('scroll', () => {
-  nav_links.style = "transform: translateX(100%);"
-})
+function setFeedback(message, type = '') {
+  feedback.textContent = message;
+  feedback.className = type ? `feedback ${type}` : 'feedback';
+}
 
-document.querySelector('.close-btn').addEventListener('click', () => {
-  nav_links.style = "transform: translateX(100%);"
-})
+function normalizeSpaces(value) {
+  return value.replace(/\s+/g, ' ').trim();
+}
 
-button.addEventListener('click', function () {
+function renderExamples(values) {
+  examplesContainer.innerHTML = values
+    .map((value) => `<button type="button" class="example-chip" data-value="${value}">${value}</button>`)
+    .join('');
 
-  nb = document.getElementById('nombre').value;
+  examplesContainer.querySelectorAll('.example-chip').forEach((chip) => {
+    chip.addEventListener('click', () => {
+      input.value = chip.dataset.value;
+      input.focus();
+      setFeedback('Exemple charge. Tu peux convertir maintenant.', 'success');
+    });
+  });
+}
 
-  if (nb) {
-    let nb_uniter = ['', 'un ', 'deux ', 'trois ', 'quatre ', 'cinq ', 'six ', 'sept', 'huit', 'neuf'];
+function updateTool(toolKey) {
+  activeTool = toolKey;
+  const config = toolConfig[toolKey];
 
-    let nb_dizaine = ['dix ', 'onze ', 'douze ', 'trieze ', 'qatorze ', 'quinze ', 'sieze ', 'dix-sept ', 'dix huit ', 'dix-neuf '];
+  toolButtons.forEach((button) => {
+    const isActive = button.dataset.tool === toolKey;
+    button.classList.toggle('active', isActive);
+    button.setAttribute('aria-selected', String(isActive));
+  });
 
-    let nb_dizaine2 = ['', 'dix', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante', 'soixante', 'quatre-vingt', 'quatre-vingt'];
+  toolHeading.textContent = config.title;
+  toolDescription.textContent = config.description;
+  toolFormat.textContent = config.format;
+  inputLabel.textContent = config.inputLabel;
+  input.placeholder = config.placeholder;
+  helperText.textContent = config.helper;
+  renderExamples(config.examples);
+  input.value = '';
+  result.value = '';
+  setFeedback('');
+}
 
-    let nb_centaine = ['', 'cent', 'deux Cent ', 'trois cent', 'quatre cent', 'cinq cent', 'six cent', 'sept cent', 'huit cent', 'neuf cent'];
+function validateDigits(value) {
+  return /^\d+$/.test(value);
+}
 
-    let aux;
-    let p_ecrit_en_ch;
-    let p_ecrit_en_l;
-    let nb_fin = [, , ,];
-
-    function decomposition_total() {
-
-      let u = (nb % 10);
-      let d = (nb % 100) - u;
-      let c = (nb % 1000) - d - u;
-      let m = (nb % 1000000) - c - d - u;
-      let million = (nb % 1000000000) - m - c - d - u;
-      let milliard = (nb % 1000000000000000000) - million - m - c - d - u;
-
-      let aux_u = u;
-      let aux_d = d / 10;
-      let aux_c = c / 100;
-      let aux_m = m / 1000;
-      let aux_million = million / 1000000;
-      let aux_milliard = milliard / 1000000000;
-
-      let nb_c_trg = aux_c + '' + aux_d + '' + aux_u;
-      let tab_t = [aux_milliard, aux_million, aux_m, nb_c_trg];
-      return tab_t;
-    }
-
-
-
-
-    function decomposition_partiel(nb9) {
-      let up = nb9 % 10;
-      let dp = (nb9 % 100) - up;
-      let cp = (nb9 % 1000) - dp - up;
-
-      let aux_up = up;
-      let aux_dp = dp / 10;
-      let aux_cp = cp / 100;
-
-      let tab_p = [aux_cp, aux_dp, aux_up];
-
-      return tab_p;
-    }
-    function lire_p(aux7) {
-
-      let uniter;
-      let dizaine;
-      let centaine;
-      let aux1;
-      aux1 = aux7;
-
-      if (aux1[0] == 0 && aux1[1] == 0) { if (aux1[2] == 0) { uniter = ' '; } else { uniter = nb_uniter[aux1[2]]; } }
-
-      if (aux1[1] == 7 || aux1[1] == 9) {
-
-        dizaine = nb_dizaine2[aux1[1]];
-        uniter = nb_dizaine[aux1[2]];
-      }
-      else {
-        if (aux1[1] != 1) {
-          dizaine = nb_dizaine2[aux1[1]];
-          uniter = nb_uniter[aux1[2]];
-        }
-        else {
-          dizaine = nb_dizaine[aux1[2]];
-          uniter = '';
-        }
-      }
-      if (aux1[0]) {
-        centaine = nb_centaine[aux1[0]];
-      }
-      let result_p = [centaine, dizaine, uniter];
-      let result_p1 = result_p.join(' ');
-      return result_p1;
-    }
-
-    aux = decomposition_total(nb);
-
-    if (aux[0] != 0) {
-      p_ecrit_en_ch = decomposition_partiel(aux[0]);
-      p_ecret_en_l = lire_p(p_ecrit_en_ch);
-      nb_fin[0] = p_ecrit_en_l + 'milliard';
-    }
-
-    if (aux[1] != 0) {
-      p_ecrit_en_ch = decomposition_partiel(aux[1]);
-      p_ecrit_en_l = lire_p(p_ecrit_en_ch);
-      nb_fin[1] = p_ecrit_en_l + 'million';
-    }
-
-    if (aux[2] != 0) {
-      p_ecrit_en_ch = decomposition_partiel(aux[2]);
-      p_ecrit_en_l = lire_p(p_ecrit_en_ch);
-      nb_fin[2] = p_ecrit_en_l + 'mille';
-    }
-
-    if (aux[3] != 0) {
-      p_ecrit_en_ch = decomposition_partiel(aux[3]);
-      p_ecrit_en_l = lire_p(p_ecrit_en_ch);
-      nb_fin[3] = p_ecrit_en_l;
-    }
-
-    let nombre_lettre = nb_fin.join(' ');
-    let div2 = document.getElementById('div2');
-    div2.style.display = 'block';
-    div2.innerHTML = nombre_lettre;
+function convertNumberToLetters(rawValue) {
+  if (!validateDigits(rawValue)) {
+    throw new Error('Entre un nombre decimal valide compose uniquement de chiffres.');
   }
 
-}, false);
+  const number = Number(rawValue);
+
+  if (!Number.isSafeInteger(number) || number < 0 || number > 999999999) {
+    throw new Error('Le nombre doit etre compris entre 0 et 999 999 999.');
+  }
+
+  if (number === 0) {
+    return 'zero';
+  }
+
+  const units = ['', 'un', 'deux', 'trois', 'quatre', 'cinq', 'six', 'sept', 'huit', 'neuf'];
+  const teens = ['dix', 'onze', 'douze', 'treize', 'quatorze', 'quinze', 'seize', 'dix-sept', 'dix-huit', 'dix-neuf'];
+  const tens = ['', '', 'vingt', 'trente', 'quarante', 'cinquante', 'soixante'];
+
+  function belowHundred(value) {
+    if (value < 10) {
+      return units[value];
+    }
+
+    if (value < 20) {
+      return teens[value - 10];
+    }
+
+    if (value < 70) {
+      const ten = Math.floor(value / 10);
+      const unit = value % 10;
+      if (unit === 0) {
+        return tens[ten];
+      }
+      if (unit === 1) {
+        return `${tens[ten]} et un`;
+      }
+      return `${tens[ten]}-${units[unit]}`;
+    }
+
+    if (value < 80) {
+      if (value === 71) {
+        return 'soixante et onze';
+      }
+      return `soixante-${belowHundred(value - 60)}`;
+    }
+
+    if (value === 80) {
+      return 'quatre-vingts';
+    }
+
+    return `quatre-vingt-${belowHundred(value - 80)}`;
+  }
+
+  function belowThousand(value) {
+    if (value < 100) {
+      return belowHundred(value);
+    }
+
+    const hundred = Math.floor(value / 100);
+    const rest = value % 100;
+
+    if (hundred === 1) {
+      return rest === 0 ? 'cent' : `cent ${belowHundred(rest)}`;
+    }
+
+    const hundredWord = rest === 0 ? 'cents' : 'cent';
+    return rest === 0
+      ? `${units[hundred]} ${hundredWord}`
+      : `${units[hundred]} cent ${belowHundred(rest)}`;
+  }
+
+  const parts = [];
+  const millions = Math.floor(number / 1000000);
+  const thousands = Math.floor((number % 1000000) / 1000);
+  const remainder = number % 1000;
+
+  if (millions > 0) {
+    parts.push(millions === 1 ? 'un million' : `${belowThousand(millions)} millions`);
+  }
+
+  if (thousands > 0) {
+    if (thousands === 1) {
+      parts.push('mille');
+    } else {
+      parts.push(`${belowThousand(thousands)} mille`);
+    }
+  }
+
+  if (remainder > 0) {
+    parts.push(belowThousand(remainder));
+  }
+
+  return normalizeSpaces(parts.join(' '));
+}
+
+function parseDecimal(value) {
+  if (!validateDigits(value)) {
+    throw new Error('Entre un nombre decimal valide compose uniquement de chiffres.');
+  }
+
+  const parsed = Number(value);
+  if (!Number.isSafeInteger(parsed) || parsed < 0) {
+    throw new Error('Le nombre decimal doit etre un entier positif.');
+  }
+  return parsed;
+}
+
+function convertValue(toolKey, rawValue) {
+  const value = rawValue.trim();
+
+  if (!value) {
+    throw new Error('Saisis une valeur avant de convertir.');
+  }
+
+  switch (toolKey) {
+    case 'letters':
+      return convertNumberToLetters(value);
+    case 'decToBin':
+      return parseDecimal(value).toString(2);
+    case 'binToDec':
+      if (!/^[01]+$/.test(value)) {
+        throw new Error('Le format binaire accepte uniquement 0 et 1.');
+      }
+      return parseInt(value, 2).toString(10);
+    case 'octToDec':
+      if (!/^[0-7]+$/.test(value)) {
+        throw new Error('Le format octal accepte uniquement les chiffres de 0 a 7.');
+      }
+      return parseInt(value, 8).toString(10);
+    case 'decToOct':
+      return parseDecimal(value).toString(8);
+    case 'decToHex':
+      return parseDecimal(value).toString(16).toUpperCase();
+    default:
+      throw new Error('Outil introuvable.');
+  }
+}
+
+function handleConvert() {
+  try {
+    const output = convertValue(activeTool, input.value);
+    result.value = output;
+    setFeedback('Conversion terminee avec succes.', 'success');
+  } catch (error) {
+    result.value = '';
+    setFeedback(error.message, 'error');
+  }
+}
+
+convertButton.addEventListener('click', handleConvert);
+
+input.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    handleConvert();
+  }
+});
+
+clearButton.addEventListener('click', () => {
+  input.value = '';
+  result.value = '';
+  setFeedback('Champ vide.');
+  input.focus();
+});
+
+copyButton.addEventListener('click', async () => {
+  if (!result.value) {
+    setFeedback('Aucun resultat a copier.', 'error');
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(result.value);
+    setFeedback('Resultat copie dans le presse-papiers.', 'success');
+  } catch (error) {
+    setFeedback('Copie impossible dans ce navigateur.', 'error');
+  }
+});
+
+toolButtons.forEach((button) => {
+  button.addEventListener('click', () => updateTool(button.dataset.tool));
+});
+
+updateTool(activeTool);

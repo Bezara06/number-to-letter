@@ -1,100 +1,138 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="fr">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Convertisseur de nombres et de bases numeriques avec interface moderne.">
+  <title>Bezara Tools | Convertisseur numerique</title>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
-  <title>
-    Écriture en lettre
-  </title>
-  <nav class="nav">
-    <div class="logo">
-      <a href="index.html">Bezara Anicé</a>
-    </div>
-    <ul class="nav-links">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="close-btn">
-        <path
-          d="M5.7070312 4.2929688L4.2929688 5.7070312L10.585938 12L4.2929688 18.292969L5.7070312 19.707031L12 13.414062L18.292969 19.707031L19.707031 18.292969L13.414062 12L19.707031 5.7070312L18.292969 4.2929688L12 10.585938L5.7070312 4.2929688 z"
-          fill="#FFFFFF" />
-      </svg>
-      <li><a href="index.html">Accueil</a></li>
-      <li><a href="about.html">À propos</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li>
-        <a href="#" class="tools">Outils</a>
-        <ol class="popup">
-          <li>PGCD</li>
-          <li>Dec -> Bin</li>
-          <li>Calculatrice</li>
-        </ol>
-      </li>
-    </ul>
-    <div class="menu">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-menu">
-        <path
-          d="M4 3C3.448 3 3 3.448 3 4L3 6C3 6.552 3.448 7 4 7L6 7C6.552 7 7 6.552 7 6L7 4C7 3.448 6.552 3 6 3L4 3 z M 11 3C10.448 3 10 3.448 10 4L10 6C10 6.552 10.448 7 11 7L13 7C13.552 7 14 6.552 14 6L14 4C14 3.448 13.552 3 13 3L11 3 z M 18 3C17.448 3 17 3.448 17 4L17 6C17 6.552 17.448 7 18 7L20 7C20.552 7 21 6.552 21 6L21 4C21 3.448 20.552 3 20 3L18 3 z M 4 10C3.448 10 3 10.448 3 11L3 13C3 13.552 3.448 14 4 14L6 14C6.552 14 7 13.552 7 13L7 11C7 10.448 6.552 10 6 10L4 10 z M 11 10C10.448 10 10 10.448 10 11L10 13C10 13.552 10.448 14 11 14L13 14C13.552 14 14 13.552 14 13L14 11C14 10.448 13.552 10 13 10L11 10 z M 18 10C17.448 10 17 10.448 17 11L17 13C17 13.552 17.448 14 18 14L20 14C20.552 14 21 13.552 21 13L21 11C21 10.448 20.552 10 20 10L18 10 z M 4 17C3.448 17 3 17.448 3 18L3 20C3 20.552 3.448 21 4 21L6 21C6.552 21 7 20.552 7 20L7 18C7 17.448 6.552 17 6 17L4 17 z M 11 17C10.448 17 10 17.448 10 18L10 20C10 20.552 10.448 21 11 21L13 21C13.552 21 14 20.552 14 20L14 18C14 17.448 13.552 17 13 17L11 17 z M 18 17C17.448 17 17 17.448 17 18L17 20C17 20.552 17.448 21 18 21L20 21C20.552 21 21 20.552 21 20L21 18C21 17.448 20.552 17 20 17L18 17 z" />
-      </svg>
-    </div>
-  </nav>
-  <h3>
-    <div class="header">
-      Écriture en lettre
-    </div>
-  </h3>
 </head>
 
 <body>
+  <header class="site-header">
+    <nav class="nav">
+      <a class="logo" href="index.html">Bezara Tools</a>
 
-  <div class="container">
-    <div class="row">
-      <div class="row1 input-group">
-        <input class="form-control" type="number" maxlength="4" placeholder="Enter un nombre ex: 2026 " id="nombre">
-        <div class="input-group-addon">
-          <input class="btn-valid" id="button" type="submit" value="Ecrire en lettre">
-          <button id="del" class="btn-del">Effacer</button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero">Accueil</a></li>
+        <li><a href="#workspace">Convertisseur</a></li>
+        <li><a href="#tool-menu">Outils</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Conversion rapide</p>
+        <h1>Une seule page pour convertir les nombres dans plusieurs formats.</h1>
+        <p class="hero-text">
+          Passe facilement de decimal a binaire, octal ou hexadecimal, et garde aussi l'outil d'ecriture en lettres.
+        </p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#workspace">Commencer</a>
+          <a class="secondary-link" href="#tool-menu">Voir les outils</a>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="result">
-    <textarea name="div2" id="div2" disabled="1" rows="3" cols="30" class="resultat"
-      placeholder="Le resultat sera aficher ici..."></textarea>
-  </div>
-  <!-- </textarea> -->
+
+      <div class="hero-panel">
+        <div class="stat-card">
+          <span class="stat-value">6</span>
+          <span class="stat-label">outils disponibles</span>
+        </div>
+        <div class="stat-card muted">
+          <span class="stat-value">Instant</span>
+          <span class="stat-label">resultat en direct</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="workspace">
+      <aside class="tool-menu" id="tool-menu">
+        <div class="tool-menu-heading">
+          <p class="eyebrow">Menu Tools</p>
+          <h2>Choisis ton outil</h2>
+        </div>
+
+        <div class="tool-list" role="tablist" aria-label="Liste des outils">
+          <button class="tool-item active" type="button" data-tool="letters" role="tab" aria-selected="true">
+            <span class="tool-title">Nombre en lettres</span>
+            <span class="tool-desc">Transformer un nombre decimal en texte.</span>
+          </button>
+          <button class="tool-item" type="button" data-tool="decToBin" role="tab" aria-selected="false">
+            <span class="tool-title">DEC to BIN</span>
+            <span class="tool-desc">Convertir un decimal en binaire.</span>
+          </button>
+          <button class="tool-item" type="button" data-tool="binToDec" role="tab" aria-selected="false">
+            <span class="tool-title">BIN to DEC</span>
+            <span class="tool-desc">Lire un binaire et retourner son decimal.</span>
+          </button>
+          <button class="tool-item" type="button" data-tool="octToDec" role="tab" aria-selected="false">
+            <span class="tool-title">OCTAL to DEC</span>
+            <span class="tool-desc">Convertir un octal en decimal.</span>
+          </button>
+          <button class="tool-item" type="button" data-tool="decToOct" role="tab" aria-selected="false">
+            <span class="tool-title">DEC to OCTAL</span>
+            <span class="tool-desc">Convertir un decimal en octal.</span>
+          </button>
+          <button class="tool-item" type="button" data-tool="decToHex" role="tab" aria-selected="false">
+            <span class="tool-title">DEC to HEXA</span>
+            <span class="tool-desc">Afficher le resultat en hexadecimal.</span>
+          </button>
+        </div>
+      </aside>
+
+      <section class="converter-card" aria-live="polite">
+        <div class="card-top">
+          <div>
+            <p class="eyebrow" id="tool-badge">Outil actif</p>
+            <h2 id="tool-heading">Nombre en lettres</h2>
+            <p id="tool-description" class="card-description">Ecris un nombre decimal pour obtenir sa version en lettres.</p>
+          </div>
+          <div class="format-pill" id="tool-format">DEC -> TXT</div>
+        </div>
+
+        <label class="field-label" for="nombre" id="input-label">Nombre decimal</label>
+        <div class="input-shell">
+          <input class="form-control" type="text" inputmode="numeric" autocomplete="off" placeholder="Ex: 2026" id="nombre">
+          <button id="button" class="btn-valid" type="button">Convertir</button>
+        </div>
+        <p class="helper-text" id="helper-text">Accepte uniquement les chiffres de 0 a 999 999 999.</p>
+
+        <div class="quick-examples" id="quick-examples">
+          <button type="button" class="example-chip" data-value="125">125</button>
+          <button type="button" class="example-chip" data-value="2026">2026</button>
+          <button type="button" class="example-chip" data-value="4096">4096</button>
+        </div>
+
+        <div class="action-row">
+          <button id="del" class="btn-del" type="button">Effacer</button>
+        </div>
+
+        <div class="result-panel">
+          <div class="result-header">
+            <span>Resultat</span>
+            <button id="copy-result" class="copy-btn" type="button">Copier</button>
+          </div>
+          <textarea id="div2" rows="5" class="resultat" readonly placeholder="Le resultat sera affiche ici..."></textarea>
+          <p class="feedback" id="feedback"></p>
+        </div>
+      </section>
+    </section>
+  </main>
 
   <footer class="footer">
-    <div class="link">
-      <a href="https://facebook.com/bezara.kely" target="_blank"><svg xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24" class="icon-footer">
-          <path
-            d="M17.525,9H14V7c0-1.032,0.084-1.682,1.563-1.682h1.868v-3.18C16.522,2.044,15.608,1.998,14.693,2 C11.98,2,10,3.657,10,6.699V9H7v4l3-0.001V22h4v-9.003l3.066-0.001L17.525,9z" />
-        </svg>
-      </a>
-      <a href="https://github.com/Bezara06" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-          class="icon-footer">
-          <path
-            d="M12 2C6.476563 2 2 6.476563 2 12C2 17.523438 6.476563 22 12 22C17.523438 22 22 17.523438 22 12C22 6.476563 17.523438 2 12 2 Z M 12 4C16.410156 4 20 7.589844 20 12C20 12.46875 19.953125 12.929688 19.875 13.375C19.628906 13.320313 19.265625 13.253906 18.84375 13.25C18.53125 13.246094 18.140625 13.296875 17.8125 13.34375C17.925781 12.996094 18 12.613281 18 12.21875C18 11.257813 17.53125 10.363281 16.78125 9.625C16.988281 8.855469 17.191406 7.535156 16.65625 7C15.074219 7 14.199219 8.128906 14.15625 8.1875C13.667969 8.070313 13.164063 8 12.625 8C11.933594 8 11.273438 8.125 10.65625 8.3125L10.84375 8.15625C10.84375 8.15625 9.964844 6.9375 8.34375 6.9375C7.777344 7.507813 8.035156 8.953125 8.25 9.6875C7.484375 10.417969 7 11.28125 7 12.21875C7 12.546875 7.078125 12.859375 7.15625 13.15625C6.878906 13.125 5.878906 13.03125 5.46875 13.03125C5.105469 13.03125 4.542969 13.117188 4.09375 13.21875C4.03125 12.820313 4 12.414063 4 12C4 7.589844 7.589844 4 12 4 Z M 5.46875 13.28125C5.863281 13.28125 7.0625 13.421875 7.21875 13.4375C7.238281 13.492188 7.257813 13.542969 7.28125 13.59375C6.851563 13.554688 6.019531 13.496094 5.46875 13.5625C5.101563 13.605469 4.632813 13.738281 4.21875 13.84375C4.1875 13.71875 4.148438 13.597656 4.125 13.46875C4.5625 13.375 5.136719 13.28125 5.46875 13.28125 Z M 18.84375 13.5C19.242188 13.503906 19.605469 13.570313 19.84375 13.625C19.832031 13.691406 19.796875 13.746094 19.78125 13.8125C19.527344 13.753906 19.109375 13.667969 18.625 13.65625C18.390625 13.652344 18.015625 13.664063 17.6875 13.6875C17.703125 13.65625 17.707031 13.625 17.71875 13.59375C18.058594 13.546875 18.492188 13.496094 18.84375 13.5 Z M 6.09375 13.78125C6.65625 13.785156 7.183594 13.824219 7.40625 13.84375C7.929688 14.820313 8.988281 15.542969 10.625 15.84375C10.222656 16.066406 9.863281 16.378906 9.59375 16.75C9.359375 16.769531 9.113281 16.78125 8.875 16.78125C8.179688 16.78125 7.746094 16.160156 7.375 15.625C7 15.089844 6.539063 15.03125 6.28125 15C6.019531 14.96875 5.929688 15.117188 6.0625 15.21875C6.824219 15.804688 7.097656 16.5 7.40625 17.125C7.683594 17.6875 8.265625 18 8.90625 18L9.03125 18C9.011719 18.109375 9 18.210938 9 18.3125L9 19.40625C6.691406 18.472656 4.933594 16.5 4.28125 14.0625C4.691406 13.960938 5.152344 13.855469 5.5 13.8125C5.660156 13.792969 5.863281 13.777344 6.09375 13.78125 Z M 18.625 13.90625C19.074219 13.917969 19.472656 14.003906 19.71875 14.0625C19.167969 16.132813 17.808594 17.855469 16 18.90625L16 18.3125C16 17.460938 15.328125 16.367188 14.375 15.84375C15.957031 15.554688 16.988281 14.863281 17.53125 13.9375C17.910156 13.910156 18.355469 13.898438 18.625 13.90625 Z M 12.5 18C12.773438 18 13 18.226563 13 18.5L13 19.9375C12.671875 19.980469 12.339844 20 12 20L12 18.5C12 18.226563 12.226563 18 12.5 18 Z M 10.5 19C10.773438 19 11 19.226563 11 19.5L11 19.9375C10.664063 19.894531 10.324219 19.832031 10 19.75L10 19.5C10 19.226563 10.226563 19 10.5 19 Z M 14.5 19C14.742188 19 14.953125 19.175781 15 19.40625C14.675781 19.539063 14.34375 19.660156 14 19.75L14 19.5C14 19.226563 14.226563 19 14.5 19Z" />
-        </svg>
-      </a>
-      <a href="https://www.linkedin.com/in/bezara-anic%C3%A9-9588133a2" target="_blank"><svg
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="icon-footer">
-          <path
-            d="M19,3H5C3.895,3,3,3.895,3,5v14c0,1.105,0.895,2,2,2h14c1.105,0,2-0.895,2-2V5C21,3.895,20.105,3,19,3z M9,17H6.477v-7H9 V17z M7.694,8.717c-0.771,0-1.286-0.514-1.286-1.2s0.514-1.2,1.371-1.2c0.771,0,1.286,0.514,1.286,1.2S8.551,8.717,7.694,8.717z M18,17h-2.442v-3.826c0-1.058-0.651-1.302-0.895-1.302s-1.058,0.163-1.058,1.302c0,0.163,0,3.826,0,3.826h-2.523v-7h2.523v0.977 C13.93,10.407,14.581,10,15.802,10C17.023,10,18,10.977,18,13.174V17z" />
-        </svg>
-      </a>
-      <a href="https://whatsapp.com/dl/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-          class="icon-footer">
-          <path
-            d="M19.077,4.928C17.191,3.041,14.683,2.001,12.011,2c-5.506,0-9.987,4.479-9.989,9.985 c-0.001,1.76,0.459,3.478,1.333,4.992L2,22l5.233-1.237c1.459,0.796,3.101,1.215,4.773,1.216h0.004 c5.505,0,9.986-4.48,9.989-9.985C22.001,9.325,20.963,6.816,19.077,4.928z M16.898,15.554c-0.208,0.583-1.227,1.145-1.685,1.186 c-0.458,0.042-0.887,0.207-2.995-0.624c-2.537-1-4.139-3.601-4.263-3.767c-0.125-0.167-1.019-1.353-1.019-2.581 S7.581,7.936,7.81,7.687c0.229-0.25,0.499-0.312,0.666-0.312c0.166,0,0.333,0,0.478,0.006c0.178,0.007,0.375,0.016,0.562,0.431 c0.222,0.494,0.707,1.728,0.769,1.853s0.104,0.271,0.021,0.437s-0.125,0.27-0.249,0.416c-0.125,0.146-0.262,0.325-0.374,0.437 c-0.125,0.124-0.255,0.26-0.11,0.509c0.146,0.25,0.646,1.067,1.388,1.728c0.954,0.85,1.757,1.113,2.007,1.239 c0.25,0.125,0.395,0.104,0.541-0.063c0.146-0.166,0.624-0.728,0.79-0.978s0.333-0.208,0.562-0.125s1.456,0.687,1.705,0.812 c0.25,0.125,0.416,0.187,0.478,0.291C17.106,14.471,17.106,14.971,16.898,15.554z" />
-        </svg>
-      </a>
-    </div>
+    <p>Concu pour des conversions numeriques rapides et claires.</p>
   </footer>
 
-  <script type="text/javascript " src="scripts/script.js"></script>
-  <script type="text/javascript" src="js/bootstrap.bundle.js"></script>
+  <script type="text/javascript" src="scripts/script.js"></script>
 </body>
 
 </html>
