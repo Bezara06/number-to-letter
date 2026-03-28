@@ -14,7 +14,8 @@
     <nav class="nav">
       <a class="logo" href="index.html">Bezara Tools</a>
 
-      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu">
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links"
+        aria-label="Ouvrir le menu">
         <span></span>
         <span></span>
         <span></span>
@@ -57,32 +58,38 @@
     <section class="workspace" id="workspace">
       <aside class="tool-menu" id="tool-menu">
         <div class="tool-menu-heading">
-          <p class="eyebrow">Menu Tools</p>
+          <p class="eyebrow">Outils</p>
           <h2>Choisis ton outil</h2>
         </div>
 
         <div class="tool-list" role="tablist" aria-label="Liste des outils">
-          <button class="tool-item active" type="button" data-tool="letters" role="tab" aria-selected="true">
+          <button class="tool-item active" type="button" data-tool="letters" role="tab" aria-selected="true"
+            tabindex="0" onclick="window.location.href='#typing'">
             <span class="tool-title">Nombre en lettres</span>
             <span class="tool-desc">Transformer un nombre decimal en texte.</span>
           </button>
-          <button class="tool-item" type="button" data-tool="decToBin" role="tab" aria-selected="false">
+          <button class="tool-item" type="button" data-tool="decToBin" role="tab" aria-selected="false" tabindex="-1"
+            onclick="window.location.href='#typing'">
             <span class="tool-title">DEC to BIN</span>
             <span class="tool-desc">Convertir un decimal en binaire.</span>
           </button>
-          <button class="tool-item" type="button" data-tool="binToDec" role="tab" aria-selected="false">
+          <button class="tool-item" type="button" data-tool="binToDec" role="tab" aria-selected="false" tabindex="-1"
+            onclick="window.location.href='#typing'">
             <span class="tool-title">BIN to DEC</span>
             <span class="tool-desc">Lire un binaire et retourner son decimal.</span>
           </button>
-          <button class="tool-item" type="button" data-tool="octToDec" role="tab" aria-selected="false">
+          <button class="tool-item" type="button" data-tool="octToDec" role="tab" aria-selected="false" tabindex="-1"
+            onclick="window.location.href='#typing'">
             <span class="tool-title">OCTAL to DEC</span>
             <span class="tool-desc">Convertir un octal en decimal.</span>
           </button>
-          <button class="tool-item" type="button" data-tool="decToOct" role="tab" aria-selected="false">
+          <button class="tool-item" type="button" data-tool="decToOct" role="tab" aria-selected="false" tabindex="-1"
+            onclick="window.location.href='#typing'">
             <span class="tool-title">DEC to OCTAL</span>
             <span class="tool-desc">Convertir un decimal en octal.</span>
           </button>
-          <button class="tool-item" type="button" data-tool="decToHex" role="tab" aria-selected="false">
+          <button class="tool-item" type="button" data-tool="decToHex" role="tab" aria-selected="false" tabindex="-1"
+            onclick="window.location.href='#typing'">
             <span class="tool-title">DEC to HEXA</span>
             <span class="tool-desc">Afficher le resultat en hexadecimal.</span>
           </button>
@@ -91,17 +98,19 @@
 
       <section class="converter-card" aria-live="polite">
         <div class="card-top">
-          <div>
+          <div id="typing">
             <p class="eyebrow" id="tool-badge">Outil actif</p>
             <h2 id="tool-heading">Nombre en lettres</h2>
-            <p id="tool-description" class="card-description">Ecris un nombre decimal pour obtenir sa version en lettres.</p>
+            <p id="tool-description" class="card-description">Ecris un nombre decimal pour obtenir sa version en
+              lettres.</p>
           </div>
           <div class="format-pill" id="tool-format">DEC -> TXT</div>
         </div>
 
         <label class="field-label" for="nombre" id="input-label">Nombre decimal</label>
         <div class="input-shell">
-          <input class="form-control" type="text" inputmode="numeric" autocomplete="off" placeholder="Ex: 2026" id="nombre">
+          <input class="form-control" type="text" inputmode="numeric" autocomplete="off" placeholder="Ex: 2026"
+            id="nombre">
           <button id="button" class="btn-valid" type="button">Convertir</button>
         </div>
         <p class="helper-text" id="helper-text">Accepte uniquement les chiffres de 0 a 999 999 999.</p>
@@ -121,7 +130,8 @@
             <span>Resultat</span>
             <button id="copy-result" class="copy-btn" type="button">Copier</button>
           </div>
-          <textarea id="div2" rows="5" class="resultat" readonly placeholder="Le resultat sera affiche ici..."></textarea>
+          <textarea id="div2" rows="5" class="resultat" readonly
+            placeholder="Le resultat sera affiche ici..."></textarea>
           <p class="feedback" id="feedback"></p>
         </div>
       </section>
@@ -131,15 +141,16 @@
   <footer class="footer">
     <div class="footer-card">
       <div class="footer-copy">
-        <p class="eyebrow">Bezara Tools</p>
+        <p class="eyebrow">Outils des Nombres</p>
         <h2>Des outils numeriques simples, rapides et lisibles sur tous les ecrans.</h2>
-        <p>Concu pour des conversions numeriques rapides et claires, avec une interface plus confortable sur mobile et tablette.</p>
+        <p>Concu pour des conversions numeriques rapides et claires, avec une interface plus confortable sur mobile et
+          tablette.</p>
       </div>
 
       <div class="footer-social">
         <span class="footer-label">Social media</span>
         <div class="social-links">
-          <a href="https://github.com" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://github.com/Bezara06" target="_blank" rel="noreferrer">GitHub</a>
           <a href="https://www.linkedin.com" target="_blank" rel="noreferrer">LinkedIn</a>
           <a href="https://www.instagram.com" target="_blank" rel="noreferrer">Instagram</a>
           <a href="https://x.com" target="_blank" rel="noreferrer">X / Twitter</a>
