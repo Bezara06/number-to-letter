@@ -73,26 +73,41 @@ const navLinks = document.querySelector('.nav-links');
 
 let activeTool = 'letters';
 
+function closeMenu() {
+  navLinks.classList.remove('open');
+  menuToggle.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('menu-open');
+}
+
 menuToggle.addEventListener('click', () => {
   const expanded = menuToggle.getAttribute('aria-expanded') === 'true';
   menuToggle.setAttribute('aria-expanded', String(!expanded));
-  navLinks.classList.toggle('open');
+  navLinks.classList.toggle('open', !expanded);
   document.body.classList.toggle('menu-open', !expanded);
 });
 
 document.addEventListener('click', (event) => {
   if (!event.target.closest('.nav') && navLinks.classList.contains('open')) {
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('menu-open');
+    closeMenu();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navLinks.classList.contains('open')) {
+    closeMenu();
+    menuToggle.focus();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 720 && navLinks.classList.contains('open')) {
+    closeMenu();
   }
 });
 
 navLinks.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => {
-    navLinks.classList.remove('open');
-    menuToggle.setAttribute('aria-expanded', 'false');
-    document.body.classList.remove('menu-open');
+    closeMenu();
   });
 });
 
